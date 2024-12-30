@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #08FFC8, #204969);
+            color: #FFF7F7;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            text-align: center;
+            border: 2px solid #FFF7F7;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #DADADA;
+            color: #204969;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        button:hover {
+            background-color: #204969;
+            color: #DADADA;
+        }
+
+        .balloons {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .balloon {
+            position: absolute;
+            width: 50px;
+            height: 70px;
+            background: radial-gradient(circle, #FFF7F7 30%, #DADADA 100%);
+            border-radius: 50%;
+            animation: float 5s infinite ease-in-out;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #FFF7F7;
+            animation: fall 3s infinite ease-in-out;
+        }
+
+        .flower {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(circle, #FF69B4 40%, #FF1493 100%);
+            border-radius: 50%;
+            animation: bloom 6s infinite ease-in-out;
+        }
+
+        .flower:after, .flower:before {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(circle, #FF69B4 40%, #FF1493 100%);
+            border-radius: 50%;
+        }
+
+        .flower:before {
+            transform: rotate(45deg);
+            top: -15px;
+            left: 15px;
+        }
+
+        .flower:after {
+            transform: rotate(-45deg);
+            bottom: -15px;
+            right: 15px;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100%) rotate(0deg);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100%) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes bloom {
+            0% {
+                transform: scale(0) translateY(100%);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1) translateY(-100%);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎉 Happy Birthday! 🎉</h1>
+        <p>Wishing you all the best on your special day!</p>
+        <button onclick="showMessage()">Click</button>
+    </div>
+
+    <div class="balloons" id="balloons"></div>
+
+    <script>
+        function showMessage() {
+            alert("May your day be as amazing as you are! 🎂🎈");
+        }
+
+        function createBalloon() {
+            const balloon = document.createElement('div');
+            balloon.classList.add('balloon');
+
+            const randomX = Math.random() * 100;
+            const delay = Math.random() * 5;
+
+            balloon.style.left = `${randomX}vw`;
+            balloon.style.animationDelay = `${delay}s`;
+            document.getElementById('balloons').appendChild(balloon);
+
+            setTimeout(() => {
+                balloon.remove();
+            }, 5000);
+        }
+
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+
+            const randomX = Math.random() * 100;
+            const delay = Math.random() * 3;
+            const color = `hsl(${Math.random() * 360}, 100%, 70%)`;
+
+            confetti.style.left = `${randomX}vw`;
+            confetti.style.backgroundColor = color;
+            confetti.style.animationDelay = `${delay}s`;
+            document.getElementById('balloons').appendChild(confetti);
+
+            setTimeout(() => {
+                confetti.remove();
+            }, 3000);
+        }
+
+        function createFlower() {
+            const flower = document.createElement('div');
+            flower.classList.add('flower');
+
+            const randomX = Math.random() * 100;
+            const delay = Math.random() * 6;
+
+            flower.style.left = `${randomX}vw`;
+            flower.style.animationDelay = `${delay}s`;
+            document.getElementById('balloons').appendChild(flower);
+
+            setTimeout(() => {
+                flower.remove();
+            }, 6000);
+        }
+
+        setInterval(createBalloon, 500);
+        setInterval(createConfetti, 200);
+        setInterval(createFlower, 700);
+    </script>
+</body>
+</html>
